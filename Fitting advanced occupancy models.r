@@ -101,6 +101,7 @@ pred.for <- predict(
 	newdata = pred.forest, 							# new values to use for predictions
 	append = TRUE) 								# add newdata to prediction data frame
 #setup forest cover plot
+library(ggplot2)
 gpred.forest <- ggplot() +
 	geom_line(aes(x = pred.for$forest, y = pred.for$Predicted), color = "blue", size = 1) +
 	geom_ribbon(aes(x = pred.for$forest, ymin = pred.for$lower, ymax = pred.for$upper),
@@ -133,6 +134,7 @@ gpred.day <- ggplot() +
 	theme_light()
 
 #plot predictions side-by-side	
+library(cowplot)
 plot_grid(gpred.forest, gpred.day, nrow = 1)
  
 #You can also illustrate by mapping the predictions of occupancy. For prediction
