@@ -1,16 +1,14 @@
-#...continued
-
 ### Fitting occupancy models with covariate effects 
 
-#load the data 
-civet2 <- read.csv("malayan civet2.csv", comment = "#", header = TRUE)
-str(civet2)
+#load new data 
+gibbon <- read.csv("gibbon.csv", comment = "#", header = TRUE)
+str(civet)
 
 #re-organise input data
 umf <- unmarkedFrameOccu(
-	y = civet2[, 3:62],								
-	siteCovs = data.frame(elevation = civet2$elevation, forest = civet2$forest),	
-	obsCovs = list(temp = civet2[, 65:124]))
+	y = gibbon[, 5:7],								
+	siteCovs = data.frame(elevation = gibbon$elevation, forest = gibbon$forest),	
+	obsCovs = list(duration = gibbon[, 8:10], day = gibbon[, 11:13]))
 summary(umf)
 
 #So far, you have a simple model that does not include covariate effects. You can try
@@ -180,7 +178,7 @@ elevation.map <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = civet2$easting, y = civet2$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 	
 
@@ -194,7 +192,7 @@ forest.map <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = civet2$easting, y = civet2$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 
 
@@ -213,7 +211,7 @@ occupancy.predicted <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = civet2$easting, y = civet2$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 	
 
@@ -227,14 +225,14 @@ occupancy.uncertainty <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = civet2$easting, y = civet2$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 		
 #plot maps side-by-side
 plot_grid(elevation.map, forest.map, nrow = 1)	
 plot_grid(occupancy.predicted, occupancy.uncertainty, nrow = 1)	
 
-#As detection is imperfect, we expect the true civet occupancy in the FMU to be higher
+#As detection is imperfect, we expect the true gibbon occupancy in the FMU to be higher
 #than these values. Still, without estimating the detection rate directly, it is difficult
 #to say how much higher. Also, remember that there was a lot of variation in detection that
 #the model did not explain. So the map shows the best estimate of occupancy based on the
