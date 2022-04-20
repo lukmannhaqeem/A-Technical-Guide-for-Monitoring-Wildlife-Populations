@@ -171,7 +171,7 @@ elevation.map <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = civet$easting, y = civet$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 	
 
@@ -185,7 +185,7 @@ forest.map <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = civet$easting, y = civet$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 
 
@@ -204,7 +204,7 @@ occupancy.predicted <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = civet$easting, y = civet$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 	
 
@@ -218,7 +218,7 @@ occupancy.uncertainty <- ggplot() +
 	theme_light() +
 	theme(plot.title = element_text(hjust = 0.5)) +
 	theme(legend.position = "bottom") +
-	geom_point(aes(x = gibbon$easting, y = gibbon$northing), colour = "cyan", shape = 0,
+	geom_point(aes(x = civet$easting, y = civet$northing), colour = "cyan", shape = 0,
 			   alpha = 1, size = 1) +
 	geom_point(aes(x = 430000, y = 590000), colour = "magenta", size = 3) 		
 #plot maps side-by-side
