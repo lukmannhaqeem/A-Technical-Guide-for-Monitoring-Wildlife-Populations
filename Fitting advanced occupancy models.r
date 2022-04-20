@@ -9,7 +9,7 @@
 #In some situations, perhaps habitat conditions and sampling efforts might explain the
 #variation in detection and occupancy better than simply assuming them to be constant. One
 #way to find out is to create a set of models, each containing a different combination of
-#your covariates.This example generates 13 more models using every possible combination
+#your covariates. This example generates 13 more models using every possible combination
 #of site and observation covariates. This does take some time to run, and hence we
 #recommend choosing carefully candidate model sets based on your knowledge of the
 #species/system instead of this approach. 
@@ -225,7 +225,7 @@ occupancy.uncertainty <- ggplot() +
 plot_grid(elevation.map, forest.map, nrow = 1)	
 plot_grid(occupancy.predicted, occupancy.uncertainty, nrow = 1)	
 
-#As detection is imperfect, we expect the true gibbon occupancy in the FMU to be higher
+#As detection is imperfect, we expect the true civet occupancy in the FMU to be higher
 #than these values. Still, without estimating the detection rate directly, it is difficult
 #to say how much higher. Also, remember that there was a lot of variation in detection that
 #the model did not explain. So the map shows the best estimate of occupancy based on the
