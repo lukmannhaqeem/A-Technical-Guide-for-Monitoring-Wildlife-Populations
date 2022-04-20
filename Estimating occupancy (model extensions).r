@@ -93,13 +93,13 @@ standard errors and confidence intervals. This information can be used to create
 pred.forest <- data.frame(
 	forest = seq(min(umf@siteCovs$forest, na.rm = TRUE),	# min forest cover
 				max(umf@siteCovs$forest, na.rm = TRUE),		# max forest cover
-				length = 100))								# number of points in range
+				length = 100))					# number of points in range
 #predict occupancy with new data
 pred.for <- predict(
-	m10, 						# model to predict from
-	type = "state", 			# sub model to predict from
-	newdata = pred.forest, 		# new values to use for predictions
-	append = TRUE) 				# add newdata to prediction data frame
+	m10, 									# model to predict from
+	type = "state", 							# sub model to predict from
+	newdata = pred.forest, 							# new values to use for predictions
+	append = TRUE) 								# add newdata to prediction data frame
 #setup forest cover plot
 gpred.forest <- ggplot() +
 	geom_line(aes(x = pred.for$forest, y = pred.for$Predicted), color = "blue", size = 1) +
@@ -114,14 +114,14 @@ gpred.forest <- ggplot() +
 #prepare new data
 pred.day <- data.frame(
 	day = seq(min(umf@obsCovs$day, na.rm = TRUE),	# first day
-			  max(umf@obsCovs$day, na.rm = TRUE),	# last day
-			  length = 100))						# number of points in range
+			  max(umf@obsCovs$day, na.rm = TRUE),			# last day
+			  length = 100))					# number of points in range
 #predict detection with new data
 pred.d <- predict(
-	m10, 						# model to predict from
-	type = "det", 			    # sub model to predict from
-	newdata = pred.day, 		# new values to use for predictions
-	append = TRUE) 				# add newdata to prediction data frame
+	m10, 									# model to predict from
+	type = "det", 			    					# sub model to predict from
+	newdata = pred.day, 							# new values to use for predictions
+	append = TRUE) 								# add newdata to prediction data frame
 #setup forest cover plot
 gpred.day <- ggplot() +
 	geom_line(aes(x = pred.d$day, y = pred.d$Predicted), color = "blue", size = 1) +
@@ -150,10 +150,10 @@ head(siteCovs.map)
 Like before, you will need to use the \texttt{predict()} function to estimate occupancy,
 standard errors, and confidence intervals for each site/pixel. 
 predict.occupancy <- predict(
-	m10,        					# model to predict from 
-	type = "state",         		# sub model to predict from
-	newdata = siteCovs.map,			# new values to use for predictions
-	append = TRUE)      			# add newdata to prediction data frame
+	m10,        								# model to predict from 
+	type = "state",         						# sub model to predict from
+	newdata = siteCovs.map,							# new values to use for predictions
+	append = TRUE)      							# add newdata to prediction data frame
 
 #save predictions
 save(predict.occupancy, file = "predict.occupancy.RData")
