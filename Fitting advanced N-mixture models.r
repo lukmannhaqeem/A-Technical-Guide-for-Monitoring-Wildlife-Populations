@@ -2,17 +2,17 @@
 
 ### Fitting occupancy models with covariate effects 
 
-So far, you have a simple model that does not include covariate effects. You can try
-fitting occupancy models that include covariate effects if you have many sampling sites.
-In some situations, perhaps habitat conditions and sampling efforts might explain the
-variation in detection and occupancy better than simply assuming them to be constant. One
-way to find out is to create a set of models, each containing a different combination of
-your covariates.This example generates 13 more models using every possible combination
-of site and observation covariates. This does take some time to run, and hence we
-recommend choosing carefully candidate model sets based on your knowledge of the
-species/system instead of this approach. 
+#So far, you have a simple model that does not include covariate effects. You can try
+#fitting occupancy models that include covariate effects if you have many sampling sites.
+#In some situations, perhaps habitat conditions and sampling efforts might explain the
+#variation in detection and occupancy better than simply assuming them to be constant. One
+#way to find out is to create a set of models, each containing a different combination of
+#your covariates.This example generates 13 more models using every possible combination
+#of site and observation covariates. This does take some time to run, and hence we
+#recommend choosing carefully candidate model sets based on your knowledge of the
+#species/system instead of this approach. 
 
-So here are the models written in the unmarked notation.
+#So here are the models written in the unmarked notation.
 
 #variations in detection (lambda~1)
 m2 <- pcount(~day ~1, K = 100, data = umf)
@@ -35,25 +35,25 @@ m14 <- pcount(~day+duration ~elevation+forest, K = 100, data = umf)
 
 ### Choosing 'best' model
 
-You can run the aictab() function from package AICcmodavg to calculate AIC
-on the list of models you have created and do the comparison. The code will produce the
-following output table:
+#You can run the aictab() function from package AICcmodavg to calculate AIC
+#on the list of models you have created and do the comparison. The code will produce the
+#following output table:
 
 library(AICcmodavg)
 fit.list <- aictab(c(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14))
 fit.list
 
-A quick look at the AIC scores reveal that model m9 is considered best for this data. Model
-m9 included forest cover as predictor of occupancy, and day as predictor of detection. 
+#A quick look at the AIC scores reveal that model m9 is considered best for this data. Model
+#m9 included forest cover as predictor of occupancy, and day as predictor of detection. 
 
 ### Making predictions
 
-The model can be used to predict expected detection and occupancy when given new data. For
-example, you could ask "*what is the occupancy of a sampling site if it has 40% forest
-cover?*" or "*what is the detection probability of a sampling site if sampling is conducted
-on Day 60?*" For prediction of a single data point, you can use the plogis() function as
-well to calculate probability like the example shown below. Since model m10 have covariates,
-you need to factor in the covariate effect and the value of interest in your calculation.
+#The model can be used to predict expected detection and occupancy when given new data. For
+#example, you could ask "*what is the occupancy of a sampling site if it has 40% forest
+#cover?*" or "*what is the detection probability of a sampling site if sampling is conducted
+#on Day 60?*" For prediction of a single data point, you can use the plogis() function as
+#well to calculate probability like the example shown below. Since model m10 have covariates,
+#you need to factor in the covariate effect and the value of interest in your calculation.
 
 #what is the expected count of a sampling site if it was located at 1500m?
 predict.count <- exp(m9@opt$par[1] + m9@opt$par[2]*1500)
@@ -63,10 +63,10 @@ predict.count
 predict.detection <- plogis(m9@opt$par[3] + m9@opt$par[4]*60)
 predict.detection
 
-You can also illustrate by plotting the predictions of detection and occupancy over the
-range of covariate values observed. To predict a range of data points, you will need to
-use the predict() function instead. The predict() function returns the predictions with
-standard errors and confidence intervals. This information can be used to create plots.
+#You can also illustrate by plotting the predictions of detection and occupancy over the
+#range of covariate values observed. To predict a range of data points, you will need to
+#use the predict() function instead. The predict() function returns the predictions with
+#standard errors and confidence intervals. This information can be used to create plots.
 
 ##predict abundance across elevation range
 #prepare new data
@@ -118,20 +118,20 @@ gpred.duration <- ggplot() +
 #plot detection predictions side-by-side	
 plot_grid(gpred.elevation, gpred.duration, nrow = 1)
 
-You can also illustrate by mapping the predictions of occupancy. For prediction
-over a surface, you will need spatial forest cover data of the whole FMU. You can get such
-data through websites such as [Global Forest Watch](www.globalforestwatch.org), although
-you may need to do some fiddling before the data can be used for analysis. Now load
-in the data you want to predict occupancy for. This data needs to have two columns for
-longitude and latitude values for each site/pixel and a column for the covariate value
-(each row is one site/pixel).
+#You can also illustrate by mapping the predictions of occupancy. For prediction
+#over a surface, you will need spatial forest cover data of the whole FMU. You can get such
+#data through websites such as [Global Forest Watch](www.globalforestwatch.org), although
+#you may need to do some fiddling before the data can be used for analysis. Now load
+#in the data you want to predict occupancy for. This data needs to have two columns for
+#longitude and latitude values for each site/pixel and a column for the covariate value
+#(each row is one site/pixel).
 
 sector <- read.csv("sector.csv", header = TRUE)
 siteCovs.map <- data.frame(elevation = sector$elevation)
 head(siteCovs.map)
 
-Like before, you will need to use the \texttt{predict()} function to estimate abundance,
-standard errors, and confidence intervals for each site/pixel. 
+#Like before, you will need to use the \texttt{predict()} function to estimate abundance,
+#standard errors, and confidence intervals for each site/pixel. 
 predict.count <- predict(
 	m9,        					    # model to predict from 
 	type = "state",         		# sub model to predict from
